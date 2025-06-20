@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             verifyBtn.textContent = 'Sending...';
             
             // Send to Make.com webhook
-            const response = await fetch('https://hook.us2.make.com/ixegb315amr97y86k8odbrc2pjh64qvf', {
+            const response = await fetch('https://hook.us2.make.com/ixegb31', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
