@@ -1,6 +1,6 @@
 # Elementor OTP Verification Solution
 
-![Elementor OTP Verification Demo](demo-screenshot.png) *Example of the OTP verification flow in action*
+
 
 ## Overview
 A robust JavaScript solution for adding phone number verification via OTP (One-Time Password) to Elementor forms. This implementation seamlessly integrates with Make.com to send SMS messages and prevents form submission until phone verification is complete.
@@ -20,10 +20,8 @@ A robust JavaScript solution for adding phone number verification via OTP (One-T
 elementor-otp-verification/
 ├── elementor-otp-verification.js   # Main implementation script
 ├── make-automation.json             # Make.com scenario template
-├── demo.html                        # Interactive demo (optional)
 ├── README.md                        # This documentation
-└── assets/
-    └── demo-screenshot.png          # Screenshot of the solution
+
 ```
 
 ## Installation
