@@ -1,0 +1,218 @@
+{
+    "name": "Elementor OTP Verification Solution (https://github.com/umairgujjar/OTP-on-elementor-form-sms-and-email/)",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 955833,
+                "maxResults": 1
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "hook": {
+                            "data": {
+                                "editable": "true"
+                            },
+                            "label": "test"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook:gateway-webhook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "twilio:SendSMS",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 3956894
+            },
+            "mapper": {
+                "fromType": "phone",
+                "to": "{{1.phone}}",
+                "messageBody": "body",
+                "from": "+14846133477",
+                "body": "Your OTP is {{1.otp}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "David Twilio",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "twilio"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "fromType": {
+                            "mode": "chose",
+                            "label": "phone number"
+                        },
+                        "messageBody": {
+                            "mode": "chose",
+                            "label": "Create a Body"
+                        },
+                        "mediaUrl": {
+                            "mode": "chose"
+                        },
+                        "smartEncoded": {
+                            "mode": "chose"
+                        },
+                        "applicationSid": {
+                            "mode": "chose"
+                        },
+                        "provideFeedback": {
+                            "mode": "chose"
+                        },
+                        "from": {
+                            "mode": "chose",
+                            "label": "(484) 613-3477"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:twilio",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "fromType",
+                        "type": "select",
+                        "label": "Send a message from",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "phone",
+                                "service",
+                                "channel"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "type": "text",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "messageBody",
+                        "type": "select",
+                        "label": "Message Body",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "body",
+                                "template"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "mediaUrl",
+                        "type": "array",
+                        "label": "Media URL",
+                        "spec": {
+                            "type": "url",
+                            "name": "value"
+                        }
+                    },
+                    {
+                        "name": "smartEncoded",
+                        "type": "boolean",
+                        "label": "Smart encoded"
+                    },
+                    {
+                        "name": "validityPeriod",
+                        "type": "uinteger",
+                        "label": "Validity period"
+                    },
+                    {
+                        "name": "statusCallback",
+                        "type": "url",
+                        "label": "Status callback"
+                    },
+                    {
+                        "name": "applicationSid",
+                        "type": "select",
+                        "label": "Application"
+                    },
+                    {
+                        "name": "maxPrice",
+                        "type": "number",
+                        "label": "Max price"
+                    },
+                    {
+                        "name": "provideFeedback",
+                        "type": "boolean",
+                        "label": "Provide feedback"
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Phone number",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "type": "text",
+                        "label": "Body",
+                        "validate": {
+                            "max": 1600
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
